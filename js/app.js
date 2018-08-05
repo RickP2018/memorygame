@@ -1,6 +1,21 @@
 /*
  * Create a list that holds all of your cards
+ * I was able to do this programatically, however, I could not figure out how to
+ * re-add them to the DOM after removing them so I created the list manually
+ *
+ * var allCards = document.querySelectorAll('.card');
+ *
+ * //turns "allCards" Nodelist to an array
+ * var cardsList = Array.from(allCards);
+ *
+ * //tells me the inner values of each card
+ * var x = $(cardsList).children();
+ * var y = $(cardsList).children();
  */
+
+//remove the classes from all of the cards before making the list
+$('li.card').removeClass('open show match');
+
 
 
 /*
@@ -36,3 +51,18 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+const deck = document.querySelector('.deck');
+let openCards = [];
+
+deck.addEventListener('click', function() {
+  const clickTarget = event.target;
+  if (clickTarget.classList.contains('card') && !clickTarget.classList.contains('match') && openCards.length < 2 && !openCards.includes(clickTarget)) {
+    toggleCard(clickTarget);
+    addToggleCard(clickTarget);
+    if (openCards.length === 2) {
+      console.log('2 cards are now opened');
+      doCardsMatch(clickTarget);
+    }
+  }
+});
