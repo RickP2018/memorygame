@@ -16,7 +16,15 @@
 //remove the classes from all of the cards before making the list
 $('li.card').removeClass('open show match');
 
-console.log('test message');
+const deck = document.querySelector('.deck');
+
+function shuffleDeck() {
+  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+  console.log('cardsToShuffle', cardsToShuffle);
+  const shuffledCards = shuffle(cardsToShuffle);
+  console.log('shuffledCards', shuffledCards);
+}
+shuffleDeck();
 
 /*
  * Display the cards on the page
@@ -52,7 +60,6 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-const deck = document.querySelector('.deck');
 let openCards = [];
 
 deck.addEventListener('click', function() {
