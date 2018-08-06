@@ -1,5 +1,3 @@
-
-
 function toggleCard(clickTarget) {
   clickTarget.classList.toggle('open');
   clickTarget.classList.toggle('show');
@@ -41,4 +39,10 @@ function isClickValid(clickTarget) {
      openCards.length < 2 &&
      !openCards.includes(clickTarget)
    );
+}
+
+function totalMoves() {
+  moves = moves + 1;
+  const starRemoves = document.querySelector('.moves');
+  starRemoves.innerHTML = moves;
 }

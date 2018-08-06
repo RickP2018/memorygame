@@ -17,16 +17,8 @@
 $('li.card').removeClass('open show match');
 
 const deck = document.querySelector('.deck');
+let moves = 0;
 
-function shuffleDeck() {
-  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-  const shuffledCards = shuffle(cardsToShuffle);
-  for (card of shuffledCards) {
-    deck.appendChild(card);
-  }
-}
-
-shuffleDeck();
 
 /*
  * Display the cards on the page
@@ -50,6 +42,11 @@ function shuffle(array) {
     return array;
 }
 
+const shuffleDeck = Array.from(document.querySelectorAll('.deck li'));
+shuffle(shuffleDeck);
+for (card of shuffleDeck) {
+  deck.appendChild(card);
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -72,6 +69,8 @@ deck.addEventListener('click', function() {
     if (openCards.length === 2) {
       console.log('2 cards are now opened');
       doCardsMatch(clickTarget);
+      totalMoves();
+      console.log('totalMoves', moves)
     }
   }
 });
