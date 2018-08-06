@@ -16,7 +16,7 @@
 //remove the classes from all of the cards before making the list
 $('li.card').removeClass('open show match');
 
-
+console.log('test message');
 
 /*
  * Display the cards on the page
