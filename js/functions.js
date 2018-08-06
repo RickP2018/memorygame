@@ -43,6 +43,30 @@ function isClickValid(clickTarget) {
 
 function totalMoves() {
   moves = moves + 1;
-  const starRemoves = document.querySelector('.moves');
-  starRemoves.innerHTML = moves;
+  const moveCounter = document.querySelector('.moves');
+  moveCounter.innerHTML = moves;
 }
+
+function checkMovesCount() {
+  if (moves === 14 || moves === 20  || moves === 27) {
+    minusOneStar();
+    if (moves === 27) {
+      alert('Braap, thanks for playing');
+    }
+  }
+}
+
+checkMovesCount();
+
+function minusOneStar() {
+  const numStars = document.querySelectorAll('.stars li');
+  for (star of numStars) {
+    if (star.style.display !== 'none') {
+      star.style.display = 'none';
+      break;
+    }
+  }
+}
+
+// minusOneStar();
+// minusOneStar();

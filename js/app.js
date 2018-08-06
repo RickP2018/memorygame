@@ -71,6 +71,7 @@ deck.addEventListener('click', function() {
       doCardsMatch(clickTarget);
       totalMoves();
       console.log('totalMoves', moves)
+      checkMovesCount();
     }
   }
 });
