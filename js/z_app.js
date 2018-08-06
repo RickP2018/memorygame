@@ -20,12 +20,10 @@ const deck = document.querySelector('.deck');
 
 function shuffleDeck() {
   const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+  console.log('cardsToShuffle', cardsToShuffle);
   const shuffledCards = shuffle(cardsToShuffle);
-  for (card of shuffledCards) {
-    deck.appendChild(card);
-  }
+  console.log('shuffledCards', shuffledCards);
 }
-
 shuffleDeck();
 
 /*

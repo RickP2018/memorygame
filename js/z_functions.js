@@ -1,5 +1,3 @@
-
-
 function toggleCard(clickTarget) {
   clickTarget.classList.toggle('open');
   clickTarget.classList.toggle('show');
@@ -12,8 +10,8 @@ function addToggleCard(clickTarget) {
     console.log('Toggled cards length is ' + openCards.length + ' card');
   } else {
     console.log('Toggled cards length is ' + openCards.length + ' cards');
+  };
   }
-}
 
 function doCardsMatch() {
   if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
