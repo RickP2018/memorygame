@@ -29,7 +29,14 @@ function doCardsMatch() {
         toggleCard(openCards[1]);
         openCards = [];
       }, 700);
-
-
   }
+}
+
+function isClickValid(clickTarget) {
+  return (
+    clickTarget.classList.contains('card') &&
+    !clickTarget.classList.contains('match') &&
+     openCards.length < 2 &&
+     !openCards.includes(clickTarget)
+   );
 }
