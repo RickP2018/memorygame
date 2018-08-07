@@ -54,7 +54,9 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
+    background: #cccccc url('../img/shamrocks02.jpg');
+    /* background: #2e3d49; */
+    background-size: 40px;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
