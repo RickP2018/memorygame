@@ -68,5 +68,40 @@ function minusOneStar() {
   }
 }
 
-// minusOneStar();
-// minusOneStar();
+function startTheClock() {
+  time = 0;
+  clockId = setInterval(() => {
+    time = time + 1
+    displayTheTime();
+  }, 1000);
+}
+
+startTheClock();
+
+//This code belongs to Matthew Cranford
+//FEND Resources
+//https://matthewcranford.com/memory-game-walkthrough-part-6-the-clock/
+function displayTheTime() {
+  const clock = document.querySelector('.clock');
+  //console.log(clock.innerHTML);
+  clock.interval = time;
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  //this is supposed to displays the time
+  // in minutes and seconds
+  //but it doesn't work.  It never converts the minutes
+  if (seconds < 10) {
+        clock.innerHTML = `${minutes}:0${seconds}`;
+  } else {
+      clock.innerHTML = `${minutes}:${seconds}`;
+  }
+  //console.log(clock);
+  //clock.innerHTML = time;
+}
+
+displayTheTime();
+
+//this is used as part of the modal
+function stopClock() {
+  clearInterval(clockId);
+}

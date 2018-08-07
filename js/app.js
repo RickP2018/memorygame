@@ -16,8 +16,13 @@
 //remove the classes from all of the cards before making the list
 $('li.card').removeClass('open show match');
 
+//global variables
 const deck = document.querySelector('.deck');
+let openCards = [];
 let moves = 0;
+let clockOff = true;
+let time = 0;
+let clockId;
 
 
 /*
@@ -59,8 +64,6 @@ for (card of shuffleDeck) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let openCards = [];
-
 deck.addEventListener('click', function() {
   const clickTarget = event.target;
   if (isClickValid(clickTarget)) {
@@ -75,3 +78,13 @@ deck.addEventListener('click', function() {
     }
   }
 });
+
+deck.addEventListener('click', event => {
+  const clickTarget = event.target;
+  if (isClickValid(clickTarget)) {
+    if (clockOff) {
+      startTheClock();
+      clockOff = false;
+    }
+  }
+})
