@@ -107,3 +107,12 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.clock {
+  width: 75px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
