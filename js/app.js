@@ -1,3 +1,5 @@
+
+
 /*
  * Create a list that holds all of your cards
  * I was able to do this programatically, however, I could not figure out how to
@@ -18,11 +20,30 @@ $('li.card').removeClass('open show match');
 
 //global variables
 const deck = document.querySelector('.deck');
+const total_pairs = 8;
 let openCards = [];
 let moves = 0;
 let clockOff = true;
 let time = 0;
 let clockId;
+let matched = 0;
+
+
+//TODO maybe? need to develop and add this with the click event
+// and/or put the startTheClock function call
+var initialClick = false;
+
+//modal global variables - TESTS
+time = 121;
+//***** displayTheTime(); // 2:01
+//***** Uncaught ReferenceError: displayTheTime is not defined
+moves = 16;
+//***** checkMovesCount(); // 2 Stars
+
+//***** writeModalStats();  // Write data to modal
+//***** toggleModal();  // Open modal
+
+getStars = 3;
 
 
 /*
@@ -88,3 +109,19 @@ deck.addEventListener('click', event => {
     }
   }
 })
+
+document.querySelector('.modal_cancel').addEventListener('click', () => {
+  toggleModal();
+});
+
+document.querySelector('.modal_replay').addEventListener('click', (replayGame) => {
+  // TODO: Call reset game HERE.  Might be done here with adding replayGame above
+});
+
+document.querySelector('.restart').addEventListener('click', resetGame);
+
+document.querySelector('.modal_replay').addEventListener('click', resetGame);
+
+if (matched === total_pairs) {
+  gameOver();
+}

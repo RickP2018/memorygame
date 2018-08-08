@@ -19,6 +19,7 @@ function doCardsMatch() {
     openCards[0].classList.toggle('match');
     openCards[1].classList.toggle('match');
     openCards = [];
+    matched = matched + 1;
     console.log('openCards length is ' + openCards.length);
   } else {
       console.log('Cards do not match!');
@@ -104,4 +105,83 @@ displayTheTime();
 //this is used as part of the modal
 function stopClock() {
   clearInterval(clockId);
+}
+
+function toggleModal() {
+  const modal = document.querySelector('.modal_background');
+  modal.classList.toggle('hide');
+}
+
+toggleModal();  //open modal
+toggleModal();  //close modal
+
+function getStars() {
+  stars = document.querySelectorAll('.stars li');
+  starCount = 0;
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      starCount = starCount + 1;
+    }
+  }
+  //console.log(starCount);
+  return starCount;
+}
+
+getStars();
+
+function writeModalStats() {
+  const timeStat = document.querySelector('.modal_time');
+  const clockTime = document.querySelector('.clock').innerHTML;
+  const movesStat = document.querySelector('.modal_moves');
+  const starsStat = document.querySelector('.modal_stars');
+  const getStars = getStars;
+
+  timeStat.innerHTML = `Time = ${clockTime}`;
+  movesStat.innerHTML = `Moves = ${moves}`;
+  starsStat.innerHTML = `Stars = ${stars}`;
+}
+
+function resetGame() {
+  resetClockAndTime();
+  resetMoves();
+  resetStars();
+  shuffleDeck();
+}
+
+function resetClockAndTime() {
+  stopClock();
+  clockOff = true;
+  time = 0;
+  displayTheTime();
+}
+
+function resetMoves() {
+  moves = 0;
+  document.querySelector('.moves').innerHTML = moves;
+}
+
+function resetStars() {
+  stars = 0;
+  const starList = document.querySelectorAll('.stars li');
+  for (star of starList) {
+    star.style.display = 'inline';
+  }
+}
+
+function gameOver() {
+  stopClock();
+  writeModalStats();
+  toggleModal();
+}
+
+function replayGame() {
+  resetGame();
+  toggleModal();
+}
+
+function resetCards() {
+  const cards = document.querySelectorAll('.deck li');
+  for (let card of cards) {
+    card.className = 'card';
+  }
 }
