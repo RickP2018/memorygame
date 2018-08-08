@@ -141,12 +141,12 @@ function writeModalStats() {
   starsStat.innerHTML = `Stars = ${stars}`;
 }
 
-function resetGame() {
-  resetClockAndTime();
-  resetMoves();
-  resetStars();
-  shuffleDeck();
-}
+// function resetGame() {
+//   resetClockAndTime();
+//   resetMoves();
+//   resetStars();
+//   shuffleDeck();
+// }
 
 function resetClockAndTime() {
   stopClock();
