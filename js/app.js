@@ -20,7 +20,7 @@ $('li.card').removeClass('open show match');
 
 //global variables
 const deck = document.querySelector('.deck');
-const total_pairs = 8;
+const totalPairs = 8;
 let openCards = [];
 let moves = 0;
 let clockOff = true;
@@ -33,7 +33,7 @@ let matched = 0;
 // and/or put the startTheClock function call
 var initialClick = false;
 
-//modal global variables - TESTS
+//modal - TESTS
 time = 121;
 displayTheTime(); // 2:01
 moves = 16;
@@ -41,9 +41,6 @@ checkMovesCount(); // 2 Stars
 
 writeModalStats();  // Write data to modal
 toggleModal();  // Open modal
-
-//getStars = 3;  not sure this is needed
-
 
 /*
  * Display the cards on the page
@@ -84,7 +81,7 @@ for (card of shuffleDeck) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-deck.addEventListener('click', function() {
+deck.addEventListener('click', function () {
   const clickTarget = event.target;
   if (isClickValid(clickTarget)) {
     toggleCard(clickTarget);
@@ -93,7 +90,7 @@ deck.addEventListener('click', function() {
       console.log('2 cards are now opened');
       doCardsMatch(clickTarget);
       totalMoves();
-      console.log('totalMoves', moves)
+      console.log('totalMoves', moves);
       checkMovesCount();
     }
   }
@@ -107,10 +104,6 @@ deck.addEventListener('click', event => {
       clockOff = false;
     }
   }
-})
-
-document.querySelector('.modal_cancel').addEventListener('click', () => {
-  toggleModal();
 });
 
 function toggleCard(clickTarget) {
@@ -135,12 +128,13 @@ function doCardsMatch() {
     openCards[1].classList.toggle('match');
     openCards = [];
     matched = matched + 1;
+
     //console.log('openCards length is ' + openCards.length);
   } else {
-      //console.log('Cards do not match!');
-      //console.log('openCards length is ' + openCards.length);
-      //openCards = [];
-      setTimeout(() => {
+    //console.log('Cards do not match!');
+    //console.log('openCards length is ' + openCards.length);
+    //openCards = [];
+    setTimeout(() => {
         toggleCard(openCards[0]);
         toggleCard(openCards[1]);
         openCards = [];
@@ -187,7 +181,7 @@ function minusOneStar() {
 function startTheClock() {
   time = 0;
   clockId = setInterval(() => {
-    time = time + 1
+    time = time + 1;
     displayTheTime();
   }, 1000);
 }
@@ -203,14 +197,16 @@ function displayTheTime() {
   clock.interval = time;
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-  //this is supposed to displays the time
+
+  //this is supposed to display the time
   // in minutes and seconds
   //but it doesn't work.  It never converts the minutes
   if (seconds < 10) {
-        clock.innerHTML = `${minutes}:0${seconds}`;
+    clock.innerHTML = `${minutes}:0${seconds}`;
   } else {
-      clock.innerHTML = `${minutes}:${seconds}`;
+    clock.innerHTML = `${minutes}:${seconds}`;
   }
+
   //console.log(clock);
   //clock.innerHTML = time;
 }
@@ -230,14 +226,12 @@ function toggleModal() {
 toggleModal();  //open modal
 toggleModal();  //close modal
 
-
-
 function writeModalStats() {
   const timeStat = document.querySelector('.modal_time');
   const clockTime = document.querySelector('.clock').innerHTML;
   const movesStat = document.querySelector('.modal_moves');
   const starsStat = document.querySelector('.modal_stars');
-  const getStars = getStars;
+  const stars = getStars;
 
   timeStat.innerHTML = `Time = ${clockTime}`;
   movesStat.innerHTML = `Moves = ${moves}`;
@@ -252,11 +246,10 @@ function getStars() {
       starCount = starCount + 1;
     }
   }
+
   console.log(starCount);  //2
   return starCount;
 }
-
-//getStars();
 
 function resetGame() {
   resetClockAndTime();
@@ -288,7 +281,7 @@ function resetStars() {
   }
 }
 
-if (matched === total_pairs) {
+if (matched === totalPairs) {
   gameOver();
 }
 
@@ -303,7 +296,12 @@ function replayGame() {
   toggleModal();
 }
 
+document.querySelector('.modal_cancel').addEventListener('click', () => {
+  toggleModal();
+});
+
 document.querySelector('.modal_replay').addEventListener('click', (replayGame));
+
 //commented this out.  Not needed? 1/2 way down page in walk thru 8
 //  => {
 //   // TODO: Call reset game HERE.  Might be done here with adding replayGame above
