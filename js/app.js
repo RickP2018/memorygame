@@ -3,7 +3,7 @@
 /*
  * Create a list that holds all of your cards
  * I was able to do this programatically, however, I could not figure out how to
- * re-add them to the DOM after removing them so I created the list manually
+ * re-add them to the DOM after removing them
  *
  * var allCards = document.querySelectorAll('.card');
  *
@@ -34,16 +34,15 @@ let matched = 0;
 var initialClick = false;
 
 //modal global variables - TESTS
-//time = 121;
-//***** displayTheTime(); // 2:01
-//***** Uncaught ReferenceError: displayTheTime is not defined
-//moves = 16;
-//***** checkMovesCount(); // 2 Stars
+time = 121;
+displayTheTime(); // 2:01
+moves = 16;
+checkMovesCount(); // 2 Stars
 
-//***** writeModalStats();  // Write data to modal
-//***** toggleModal();  // Open modal
+writeModalStats();  // Write data to modal
+toggleModal();  // Open modal
 
-//getStars = 3;
+//getStars = 3;  not sure this is needed
 
 
 /*
@@ -114,23 +113,6 @@ document.querySelector('.modal_cancel').addEventListener('click', () => {
   toggleModal();
 });
 
-document.querySelector('.modal_replay').addEventListener('click', (replayGame) => {
-  // TODO: Call reset game HERE.  Might be done here with adding replayGame above
-});
-
-document.querySelector('.restart').addEventListener('click', function resetGame() {
-  resetClockAndTime();
-  resetMoves();
-  resetStars();
-  shuffleDeck();
-});
-
-document.querySelector('.modal_replay').addEventListener('click', resetGame);
-
-if (matched === total_pairs) {
-  gameOver();
-}
-
 function toggleCard(clickTarget) {
   clickTarget.classList.toggle('open');
   clickTarget.classList.toggle('show');
@@ -148,15 +130,15 @@ function addToggleCard(clickTarget) {
 
 function doCardsMatch() {
   if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
-    console.log('Cards match!');
+    //console.log('Cards match!');
     openCards[0].classList.toggle('match');
     openCards[1].classList.toggle('match');
     openCards = [];
     matched = matched + 1;
-    console.log('openCards length is ' + openCards.length);
+    //console.log('openCards length is ' + openCards.length);
   } else {
-      console.log('Cards do not match!');
-      console.log('openCards length is ' + openCards.length);
+      //console.log('Cards do not match!');
+      //console.log('openCards length is ' + openCards.length);
       //openCards = [];
       setTimeout(() => {
         toggleCard(openCards[0]);
@@ -248,19 +230,7 @@ function toggleModal() {
 toggleModal();  //open modal
 toggleModal();  //close modal
 
-function getStars() {
-  stars = document.querySelectorAll('.stars li');
-  starCount = 0;
-  for (star of stars) {
-    if (star.style.display !== 'none') {
-      starCount = starCount + 1;
-    }
-  }
-  //console.log(starCount);
-  return starCount;
-}
 
-//getStars();
 
 function writeModalStats() {
   const timeStat = document.querySelector('.modal_time');
@@ -274,12 +244,29 @@ function writeModalStats() {
   starsStat.innerHTML = `Stars = ${stars}`;
 }
 
+function getStars() {
+  stars = document.querySelectorAll('.stars li');
+  starCount = 0;
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      starCount = starCount + 1;
+    }
+  }
+  console.log(starCount);  //2
+  return starCount;
+}
+
+//getStars();
+
 function resetGame() {
   resetClockAndTime();
   resetMoves();
   resetStars();
   shuffleDeck();
 }
+
+document.querySelector('.restart').addEventListener('click', resetGame);
+document.querySelector('.modal_replay').addEventListener('click', resetGame);
 
 function resetClockAndTime() {
   stopClock();
@@ -301,6 +288,10 @@ function resetStars() {
   }
 }
 
+if (matched === total_pairs) {
+  gameOver();
+}
+
 function gameOver() {
   stopClock();
   writeModalStats();
@@ -311,6 +302,12 @@ function replayGame() {
   resetGame();
   toggleModal();
 }
+
+document.querySelector('.modal_replay').addEventListener('click', (replayGame));
+//commented this out.  Not needed? 1/2 way down page in walk thru 8
+//  => {
+//   // TODO: Call reset game HERE.  Might be done here with adding replayGame above
+// });
 
 function resetCards() {
   const cards = document.querySelectorAll('.deck li');
