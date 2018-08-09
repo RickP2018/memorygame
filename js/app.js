@@ -28,7 +28,6 @@ let time = 0;
 let clockId;
 let matched = 0;
 
-
 //TODO maybe? need to develop and add this with the click event
 // and/or put the startTheClock function call
 var initialClick = false;
@@ -51,24 +50,34 @@ toggleModal();  // Open modal
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
-const shuffleDeck = Array.from(document.querySelectorAll('.deck li'));
-shuffle(shuffleDeck);
-for (card of shuffleDeck) {
-  deck.appendChild(card);
+// const shuffleDeck = Array.from(document.querySelectorAll('.deck li'));
+// shuffle(shuffleDeck);
+// for (card of shuffleDeck) {
+//   deck.appendChild(card);
+// }
+
+function shuffleCards() {
+  const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+  const shuffledCards = shuffle(cardsToShuffle);
+  for (card of shuffledCards) {
+    deck.appendChild(card);
+  }
 }
+
+shuffleCards();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -255,7 +264,7 @@ function resetGame() {
   resetClockAndTime();
   resetMoves();
   resetStars();
-  shuffleDeck();
+  shuffleCards();
 }
 
 document.querySelector('.restart').addEventListener('click', resetGame);
