@@ -90,11 +90,18 @@ shuffleCards();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+
 deck.addEventListener('click', function () {
   const clickTarget = event.target;
   if (isClickValid(clickTarget)) {
     toggleCard(clickTarget);
     addToggleCard(clickTarget);
+    if (isClickValid(clickTarget)) {
+      if (clockOff) {
+        startTheClock();
+        clockOff = false;
+      }
+    }
     if (openCards.length === 2) {
       console.log('2 cards are now opened');
       doCardsMatch(clickTarget);
@@ -105,15 +112,18 @@ deck.addEventListener('click', function () {
   }
 });
 
-deck.addEventListener('click', event => {
-  const clickTarget = event.target;
-  if (isClickValid(clickTarget)) {
-    if (clockOff) {
-      startTheClock();
-      clockOff = false;
-    }
-  }
-});
+// This appears to be duplicated when I merged the two js files.
+// I believe I need to add the clockoff portion below to the
+// function above. I did that.  I need to test more to see if I am correct.
+// deck.addEventListener('click', event => {
+//   const clickTarget = event.target;
+//   if (isClickValid(clickTarget)) {
+//     if (clockOff) {
+//       startTheClock();
+//       clockOff = false;
+//     }
+//   }
+// });
 
 function toggleCard(clickTarget) {
   clickTarget.classList.toggle('open');
