@@ -1,29 +1,31 @@
 //global variables
 const deck = document.querySelector('.deck');
+const totalPairs = 8;
 
 let toggledCards = [];
 let moves = 0;
 let clockOff = true;
 let time = 0;
 let clockId;
+let matched = 0;
 
 //For Modal Testing
-time = 121;
-displayTime(); //2:01
-moves = 16;
-checkScore(); // 2 stars
-
-writeModalStats();
-toggleModal();  //Opens the modal
-
-// modal
+// time = 121;
+// displayTime(); //2:01
+// moves = 16;
+// checkScore(); // 2 stars
+//
+// writeModalStats();
+// toggleModal();  //Opens the modal
 
 /*
  * Create a list that holds all of your cards
  */
- //remove the classes from all of the cards before making the list
- $('li.card').removeClass('open show match');
 
+//remove the classes from all of the cards before making the list
+$('li.card').removeClass('open show match');
+
+//
 
 /*
  * Display the cards on the page
@@ -34,17 +36,18 @@ toggleModal();  //Opens the modal
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
 
-    return array;
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 function shuffleDeck() {
@@ -56,6 +59,7 @@ function shuffleDeck() {
     deck.appendChild(card);
   }
 }
+
 shuffleDeck();
 
 /*
@@ -111,10 +115,14 @@ function checkForMatch() {
     toggledCards[0].classList.toggle('match');
     toggledCards[1].classList.toggle('match');
     toggledCards = [];
-    console.log("Two cards match!");
+    matched = matched + 1;
+    console.log('Two cards match!');
+    if (matched === totalPairs) {
+      gameOver();
+    }
   } else {
     setTimeout(function() {
-      console.log("Not a match!");
+      console.log('Not a match!');
       toggleCard(toggledCards[0]);
       toggleCard(toggledCards[1]);
       toggledCards = [];
@@ -174,7 +182,7 @@ function displayTime() {
   if (seconds < 10) {
     clock.innerHTML = `${minutes}:0${seconds}`;
   } else {
-    clock.innerHTML = `${minutes}:${seconds}`
+    clock.innerHTML = `${minutes}:${seconds}`;
   }
 }
 
@@ -194,6 +202,93 @@ function writeModalStats() {
   const timeStat = document.querySelector('.modal_time');
   const clockTime = document.querySelector('.clock').innerHTML;
   const movesStat = document.querySelector('.modal_moves');
+  const starsStat = document.querySelector('.modal_stars');
+  const stars = getStars();
 
   timeStat.innerHTML = `Time = ${clockTime}`;
+  movesStat.innerHTML = `Moves = ${moves}`;
+  starsStat.innerHTML = `Stars = ${stars}`;
+}
+
+function getStars() {
+  stars = document.querySelectorAll('.stars li');
+  starCount = 0;
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      starCount = starCount + 1;
+    }
+  }
+  console.log(starCount);
+  return starCount;
+}
+
+document.querySelector('.modal_cancel').addEventListener('click', function () {
+  toggleModal();
+});
+
+// IE doesn't support ES6 arrow functions
+// document.querySelector('.modal_cancel').addEventListener('click', () => {
+//   toggleModal();
+// });
+
+document.querySelector('.modal_replay').addEventListener('click', replayGame);
+
+// ***** Might be the same as above and maybe delete this one... *******
+// ***************** Might need this again so do't remove yet ***********
+// document.querySelector('.modal_replay').addEventListener('click', resetGame) {
+//   //TODO: Call reset game HERE
+//
+//   //console.log('replay');
+// });
+
+// IE doesn't support ES6 arrow functions
+// document.querySelector('.modal_replay').addEventListener('click', () => {
+//   console.log('replay');
+// });
+
+function resetGame() {
+  resetClockAndTime();
+  resetMoves();
+  resetStars();
+  shuffleDeck();
+}
+
+function replayGame() {
+  resetGame();
+  toggleModal();
+}
+
+document.querySelector('.restart').addEventListener('click', resetGame);
+
+function resetClockAndTime() {
+  stopClock();
+  clockOff = true;
+  time = 0;
+  displayTime();
+}
+
+function resetMoves() {
+  moves = 0;
+  document.querySelector('.moves').innerHTML = moves;
+}
+
+function resetStars() {
+  stars = 0;
+  const starList = document.querySelectorAll('.stars li');
+  for (star of starList) {
+    star.style.display = 'inline';
+  }
+}
+
+function gameOver() {
+  stopClock();
+  writeModalStats();
+  toggleModal();
+}
+
+function resetCards() {
+  const cards = document.querySelectorAll('.deck li');
+  for (let card of cards) {
+    card.className = 'card';
+  }
 }
