@@ -1,5 +1,5 @@
 // This code is adapted from matthewcranford.com/memory-game-walkthroughs
-// provided in the FEND Resources.
+// provided in the FEND Resources...
 // I want to get this working right before I re-write it for submission.
 
 //global variables
