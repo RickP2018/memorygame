@@ -1,3 +1,7 @@
+// This code is adapted from matthewcranford.com/memory-game-walkthroughs
+// provided in the FEND Resources.
+// I want to get this working right before I re-write it for submission.
+
 //global variables
 const deck = document.querySelector('.deck');
 const totalPairs = 8;
@@ -10,22 +14,21 @@ let clockId;
 let matched = 0;
 
 //For Modal Testing
-// time = 121;
-// displayTime(); //2:01
-// moves = 16;
-// checkScore(); // 2 stars
-//
-// writeModalStats();
-// toggleModal();  //Opens the modal
+//forModalTesting();
 
 /*
  * Create a list that holds all of your cards
  */
 
 //remove the classes from all of the cards before making the list
-$('li.card').removeClass('open show match');
+resetCardClasses();
+//$('li.card').removeClass('open show match');
 
-//
+//resetClockAndTime();
+//replayGame();
+//resetGame();
+//stopClock();
+//clockOff = true;
 
 /*
  * Display the cards on the page
@@ -237,7 +240,7 @@ document.querySelector('.modal_replay').addEventListener('click', replayGame);
 // ***************** Might need this again so do't remove yet ***********
 // document.querySelector('.modal_replay').addEventListener('click', resetGame) {
 //   //TODO: Call reset game HERE
-//
+//   // This is accomplished in the querySelector above
 //   //console.log('replay');
 // });
 
@@ -250,15 +253,22 @@ function resetGame() {
   resetClockAndTime();
   resetMoves();
   resetStars();
+  resetCardClasses();
   shuffleDeck();
 }
 
 function replayGame() {
   resetGame();
   toggleModal();
+  resetCardClasses();
 }
 
 document.querySelector('.restart').addEventListener('click', resetGame);
+
+function resetCardClasses () {
+  $('li.card').removeClass('open show match');
+}
+resetCardClasses();
 
 function resetClockAndTime() {
   stopClock();
@@ -289,6 +299,16 @@ function gameOver() {
 function resetCards() {
   const cards = document.querySelectorAll('.deck li');
   for (let card of cards) {
-    card.className = 'card';
+    resetCardClasses();
   }
+}
+
+function forModalTesting() {
+  time = 121;
+  displayTime(); //2:01
+  moves = 16;
+  checkScore(); // 2 stars
+
+  writeModalStats();
+  toggleModal();  //Opens the modal
 }
