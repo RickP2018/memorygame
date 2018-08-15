@@ -164,9 +164,11 @@ function startClock() {
     //console.log(time);
   }, 1000);
 }
-startClock();
+//startClock();
 
 //same as above? but arrow function instead
+//I've read that IE doesn't play nice with arrow script.
+//use js function instead
 // function startClock() {
 //   //time = 0; changed to global scope
 //   let clockId = setInterval(() => {
@@ -250,17 +252,18 @@ document.querySelector('.modal_replay').addEventListener('click', replayGame);
 // });
 
 function resetGame() {
-  resetClockAndTime();
-  resetMoves();
-  resetStars();
-  resetCardClasses();
+  location.reload();
+  // resetClockAndTime();
+  // resetMoves();
+  // resetStars();
+  // resetCardClasses();
   shuffleDeck();
 }
 
 function replayGame() {
   resetGame();
   toggleModal();
-  resetCardClasses();
+  //resetCardClasses();
 }
 
 document.querySelector('.restart').addEventListener('click', resetGame);
