@@ -118,6 +118,7 @@ function checkForMatch() {
     toggledCards[0].classList.toggle('match');
     toggledCards[1].classList.toggle('match');
     toggledCards = [];
+    moves = moves - 1; // Dont add moves if a match
     matched = matched + 1;
     console.log('Two cards match!');
     if (matched === totalPairs) {
@@ -138,6 +139,10 @@ function addMove() {
   const movesText = document.querySelector('.moves');
   movesText.innerHTML = moves;
 }
+
+
+// function removeMove() {
+// }
 
 function checkScore() {
   if (moves === 14 || moves === 20) {
@@ -211,7 +216,7 @@ function writeModalStats() {
   const stars = getStars();
 
   timeStat.innerHTML = `Time = ${clockTime}`;
-  movesStat.innerHTML = `Moves = ${moves}`;
+  movesStat.innerHTML = `Moves = ${moves+1}`;
   starsStat.innerHTML = `Stars = ${stars}`;
 }
 

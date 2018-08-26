@@ -3,12 +3,17 @@
 .stylelintrc
 .eslintrc.json
 
-notes/
 index - originalCopy.html
 My github remote url_memory game.txt
-js/app - originalCopy.js
-img/geometry2 - originalCopy.png
+
 css/app - originalCopy.css
-app02.js
+
+js/app - originalCopy.js
+js/app02.js
 js/z_app.js
 js/z_functions.js
+js/todo.js
+
+img/geometry2 - originalCopy.png
+
+notes/
